@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "cover": "lef2015.jpg",
+    "sound": "lef2015.mp3",
+    "title": "L.E.J - SUMMER 2015",
+    "category": "pop",
+    "video" : "video-anime.mp4"
+  },
+  {
+    "id": 2,
+    "cover": "mozinor.jpg",
+    "sound": "Romanian-Boy.mp3",
+    "title": "mozinor Romanian Boy",
+    "category": "electro",
+    "video" : "video-anime.mp4"
+  },
+  {
+    "id": 3,
+    "cover": "Nelly-Furtado-Promiscuous.jpg",
+    "sound": "Nelly-Furtado-Promiscuous.mp3",
+    "title": "Nelly-Furtado-Promiscuous",
+    "category": "electro",
+    "video" : "video-anime.mp4"
+  },
+  {
+    "id": 4,
+    "cover": "Brandy-Monica-Modjo.jpg",
+    "sound": "Brandy-Monica-Modjo.mp3",
+    "title": "Brandy-Monica-Modjo",
+    "category": "zoulou",
+    "video" : "Romanian-Boy.mp4"
+  },
+  {
+    "id": 5,
+    "cover": "MEUTE.jpg",
+    "sound": "meute.mp3",
+    "title": "MEUTE You and Me",
+    "category": "electro",
+    "video" : "video-anime.mp4"
+  },
+  {
+    "id": 6,
+    "cover": "corse.jpg",
+    "sound": "corse.mp3",
+    "title": "Le-sandwich-corse",
+    "category": "blague",
+    "video" : "corse.mp4"
+  }
+]

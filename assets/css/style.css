@@ -1,0 +1,181 @@
+/* Animation pour faire tourner le disque */
+@keyframes turnAround {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Style pour la pochette d'album */
+.cover {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%; /* Faire en sorte que la cover soit un cercle */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style pour le disque vinyle */
+.vinyle {
+    width: 350px;
+    height: 350px;
+}
+
+/* Style pour le conteneur du disque */
+.disque {
+    position: relative;
+    display: inline-block;
+    animation: turnAround 5s infinite linear;
+}
+
+/* Classe pour mettre en pause l'animation */
+.pause {
+    animation-play-state: paused;
+}
+
+/* Style pour les éléments de la playlist */
+li {
+    background-color: rgba(0, 128, 128, 0.7); /* Couleur vert-bleu avec une opacité de 0.7 */
+    color: #fff; /* Couleur du texte en blanc */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif; /* Police de caractères moderne */
+    font-size: 10px;
+}
+
+/* Style pour l'élément de la playlist en cours de lecture */
+li.playing {
+    background-color: #ff4500; /* Couleur différente pour l'élément en cours de lecture */
+    color: #fff; /* Couleur du texte */
+}
+
+/* Style pour le corps de la page */
+body {
+    margin: 0; /* Supprime les marges par défaut */
+    padding: 0; /* Supprime les espaces de remplissage par défaut */
+    font-family: 'Courier New', Courier, monospace; /* Police de caractères monospace rétro */
+    background-image: url('/assets/pictures/Beautiful.jpg'); /* Ajoutez le chemin de votre image ici */
+    background-size: cover; /* Pour couvrir tout l'arrière-plan */
+    background-position: center; /* Pour centrer l'image */
+    background-repeat: no-repeat; /* Pour éviter la répétition de l'image */
+}
+
+/* Style pour les boutons du lecteur */
+#audio-controls button {
+    background-color: #ffa500; /* Orange */
+    color: #fff; /* Blanc */
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style pour les boutons de contrôle du lecteur */
+#audio-controls button:hover {
+    background-color: #ff4500; /* Orange foncé au survol */
+}
+
+/* Style pour le conteneur principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+}
+
+/* Style pour le conteneur de la playlist */
+#playlist-container {
+    width: 70%; /* Largeur de la playlist */
+    height: 200px; /* Hauteur fixe du conteneur */
+    overflow-y: scroll; /* Activation du défilement vertical */
+}
+
+/* Media query pour les appareils de petite taille (smartphones) */
+@media only screen and (max-width: 768px) {
+    /* Adapter le style pour les appareils de petite taille ici */
+    .vinyle {
+        width: 250px;
+        height: 250px;
+    }
+    .cover {
+        width: 100px;
+        height: 100px;
+    }
+    li {
+        font-size: 14px;
+    }
+    #playlist-container {
+        max-height: 50vh; /* Réduire la hauteur de la playlist */
+        overflow-y: auto; /* Ajouter une barre de défilement verticale si nécessaire */
+        width: 80%; /* Largeur de la playlist pour les smartphones */
+    }
+}
+
+/* Media query pour les appareils de taille moyenne à grande (tablettes et ordinateurs) */
+@media only screen and (min-width: 769px) {
+    /* Adapter le style pour les tablettes et ordinateurs ici */
+    #playlist-container {
+        width: 50%; /* Largeur de la playlist pour les tablettes et ordinateurs */
+    }
+}
+
+/* Style pour la barre de défilement de la liste de diffusion */
+#playlist-container::-webkit-scrollbar {
+    width: 10px; /* Largeur de la barre de défilement */
+    background-color: transparent; /* Couleur de fond transparente */
+}
+
+/* Style pour le curseur de la barre de défilement */
+#playlist-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 128, 128, 0.7); /* Couleur vert-bleu de la barre de défilement avec une opacité de 0.7 */
+    border-radius: 5px; /* Bordures arrondies */
+    opacity: 0.7; /* Opacité de la barre de défilement */
+}
+
+/* Style pour la barre de défilement lorsqu'elle est survolée */
+#playlist-container::-webkit-scrollbar-thumb:hover {
+    opacity: 1; /* Opacité maximale au survol */
+}
+
+body {
+    /* Supprimez l'ancienne image de fond et définissez la vidéo comme fond */
+    background: url('/uploads/video/video-anime.mp4') ;
+    background-size: cover; /* Pour couvrir tout l'arrière-plan */
+    background-attachment: fixed; /* Pour que la vidéo reste fixe pendant le défilement */
+}
+/* Ajoutez ces styles pour positionner la vidéo en arrière-plan */
+#background-video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+#background-video {
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Styles supplémentaires pour le contenu principal de la page */
+/* Assurez-vous d'ajuster les styles en fonction de votre mise en page */
