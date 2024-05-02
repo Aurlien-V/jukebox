@@ -21,7 +21,7 @@ let lastPlayed = null;
 // Fonction pour récupérer les données à partir du fichier JSON
 async function fetchMusicData() {
     try {
-        const response = await fetch('assets/json/music_data.json');
+        const response = await fetch('https://node-7h35.onrender.com/api/v1/music');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -141,7 +141,7 @@ function moveSelectedToTop() {
 
 // Gestionnaire d'événement pour le clic sur le bouton de musique aléatoire
 randomButton.addEventListener("click", () => {
-    updateRandomMusic(data);
+    updateRandomMusic(data.result);
 });
 
 // Point d'entrée
@@ -150,7 +150,7 @@ randomButton.addEventListener("click", () => {
     data = await fetchMusicData();
 
     // Construire la playlist
-    buildPlaylist(data);
+    buildPlaylist(data.result);
 
     // Ajouter les écouteurs d'événements
     addEventListeners();
@@ -159,7 +159,7 @@ randomButton.addEventListener("click", () => {
 // Ajouter un gestionnaire d'événements pour détecter la fin de la musique
 lecteur.addEventListener("ended", () => {
     disqueRotation.classList.add("pause");
-    updateRandomMusic(data);
+    updateRandomMusic(data.result);
 });
 
 // Ajouter un gestionnaire d'événements pour détecter lorsque la musique est en pause
