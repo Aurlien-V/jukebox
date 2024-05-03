@@ -75,3 +75,21 @@ function playRandomMusic() {
 // Ajouter un écouteur d'événements au bouton "Musique Aléatoire"
 elements.randomButton.addEventListener("click", playRandomMusic);
 ;
+
+// Fonction pour jouer une musique
+function playMusic(music, target) {
+    elements.lecteur.src = `${config.urlSound}${music.sound}`;
+    elements.lecteur.play();
+    elements.cover.src = `${config.urlCover}${music.cover}`;
+    // Retirer la classe 'playing' de tous les éléments de la playlist
+    document.querySelectorAll("li").forEach(item => item.classList.remove('playing'));
+    // Ajouter la classe 'playing' à l'élément cliqué
+    target.classList.add('playing');
+    // Faire tourner le vinyle
+    document.querySelector('.disque').classList.remove('pause');
+}
+
+// Ajouter un écouteur d'événements au lecteur pour arrêter le vinyle lorsque la musique est terminée
+elements.lecteur.addEventListener('ended', function() {
+    document.querySelector('.disque').classList.add('pause');
+});
