@@ -32,7 +32,7 @@ async function fetchMusicData() {
 }
 
 // Fonction pour construire la playlist
-function buildPlaylist(data) {
+function buildPlaylist('https://api-main1.onrender.com/api/v1/musics') {
     data.forEach((music) => {
         playlist.innerHTML += `<li id="${music.id}"><h2>${music.title}</h2><div><small>${music.category}</small></div></li>`;
     });
@@ -150,7 +150,7 @@ randomButton.addEventListener("click", () => {
     data = await fetchMusicData();
 
     // Construire la playlist
-    buildPlaylist(data);
+    buildPlaylist('https://api-main1.onrender.com/api/v1/musics');
 
     // Ajouter les écouteurs d'événements
     addEventListeners();
