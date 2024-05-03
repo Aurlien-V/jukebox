@@ -1,14 +1,16 @@
 // Constantes pour les éléments du lecteur
-const playlist = document.getElementById("playlist");
-const lecteur = document.querySelector("#lecteur");
-const cover = document.getElementById("cover");
-const randomButton = document.getElementById("randomButton");
+const elements = {
+    playlist: document.getElementById("playlist"),
+    lecteur: document.querySelector("#lecteur"),
+    cover: document.getElementById("cover"),
+    randomButton: document.getElementById("randomButton")
+};
 
 // Configuration des URLs pour les covers et les musiques
 const config = {
     urlCover: "uploads/covers/",
     urlSound: "uploads/musics/"
-}
+};
 
 // Variables
 let data;
@@ -17,7 +19,7 @@ let lastPlayed = null;
 // Fonction pour récupérer les données à partir du fichier JSON
 async function fetchMusicData() {
     try {
-        const response = await fetch('https://api-main1.onrender.com/api/v1/musics');
+        const response = await fetch('assets/json/music_data.json');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -28,14 +30,14 @@ async function fetchMusicData() {
 }
 
 // Fonction pour jouer une musique
-function playMusic(music) {
-    lecteur.src = `${config.urlSound}${music.sound}`;
-    lecteur.play();
-    cover.src = `${config.urlCover}${music.cover}`;
+function playMusic(music, target) {
+    elements.lecteur.src = `${config.urlSound}${music.sound}`;
+    elements.lecteur.play();
+    elements.cover.src = `${config.urlCover}${music.cover}`;
     // Retirer la classe 'playing' de tous les éléments de la playlist
     document.querySelectorAll("li").forEach(item => item.classList.remove('playing'));
     // Ajouter la classe 'playing' à l'élément cliqué
-    event.target.classList.add('playing');
+    target.classList.add('playing');
 }
 
 // Point d'entrée
@@ -53,9 +55,23 @@ function playMusic(music) {
     data.forEach((music) => {
         const li = document.createElement("li");
         li.textContent = music.title;
-        li.addEventListener("click", () => {
-            playMusic(music);
+        li.addEventListener("click", (event) => {
+            playMusic(music, event.target);
         });
-        playlist.appendChild(li);
+        elements.playlist.appendChild(li);
     });
 })();
+
+// Fonction pour jouer une musique aléatoire
+function playRandomMusic() {
+    // Générer un index aléatoire
+    const randomIndex = Math.floor(Math.random() * data.length);
+    // Récupérer la musique correspondante
+    const randomMusic = data[randomIndex];
+    // Jouer la musique
+    playMusic(randomMusic, elements.playlist.children[randomIndex]);
+}
+
+// Ajouter un écouteur d'événements au bouton "Musique Aléatoire"
+elements.randomButton.addEventListener("click", playRandomMusic);
+;
