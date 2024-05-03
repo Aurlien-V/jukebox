@@ -15,13 +15,13 @@ const config = {
 }
 
 // Variables
-let data;
-let lastPlayed = null;
+let playlistVisible = false;
+let data = [];
 
 // Fonction pour récupérer les données à partir du fichier JSON
 async function fetchMusicData() {
     try {
-        const response = await fetch('https://api-main1.onrender.com/api/v1/musics');
+        const response = await fetch('assets/json/music_data.json');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
