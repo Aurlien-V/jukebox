@@ -18,16 +18,35 @@ let lastPlayed = null;
 
 // Fonction pour récupérer les données à partir du fichier JSON
 async function fetchMusicData() {
-    try {
+    
         const response = await fetch("https://api2-6seh.onrender.com/api/v1/musics/");
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
-}
+        dbMusic = await req.json();
+        data = dbMusic.result;
+        data.forEach((music) => {
+            playlist.innerHTML += `<li id="${music.id}"><h2>${music.title}</h2><div><small>${music.category}</small></div></li>`;
+        });
+    
+        const allLi = document.querySelectorAll("li");
+    
+        allLi.forEach((li) => {
+            li.addEventListener("click", function (elem) {
+                const id = parseInt(li.id);
+                const searchById = data.find((element) => element.id === id);
+                lecteur.src = `${config.urlSound}${searchById.sound}`;
+                lecteur.play();
+                cover.src = `${config.urlCover}${searchById.cover}`;
+                if (disque.classList.contains("pause")) {
+                    disque.classList.remove("pause");
+                }
+    
+                allLi.forEach((item) => {
+                    item.classList.remove("clignote");
+                });
+    
+                li.classList.add("clignote");
+            });
+    
+        });
 
 // Fonction pour jouer une musique
 function playMusic(music, target) {
