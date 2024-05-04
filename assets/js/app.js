@@ -19,7 +19,7 @@ let lastPlayed = null;
 // Fonction pour récupérer les données à partir du fichier JSON
 async function fetchMusicData() {
     try {
-        const response = await fetch('https://api2-6seh.onrender.com/api/v1/musics/');
+        const response = await fetch("https://api2-6seh.onrender.com/api/v1/musics/");
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
