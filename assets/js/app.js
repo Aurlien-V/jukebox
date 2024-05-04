@@ -96,12 +96,6 @@ elements.randomButton.addEventListener("click", playRandomMusic);
     // Récupérer les données
     data = await fetchMusicData();
     
-    // Vérifier si data est un tableau
-    if (!Array.isArray(data)) {
-        console.error('Data is not an array');
-        return;
-    }
-
     // Ajouter les musiques à la playlist
     data.forEach((music) => {
         const li = document.createElement("li");
