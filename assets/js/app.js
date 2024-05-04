@@ -3,7 +3,8 @@ const elements = {
     playlist: document.getElementById("playlist"),
     lecteur: document.querySelector("#lecteur"),
     cover: document.getElementById("cover"),
-    randomButton: document.getElementById("randomButton")
+    randomButton: document.getElementById("randomButton"),
+    disque: document.querySelector(".disque") // Ajouté ici
 };
 
 // Configuration des URLs pour les covers et les musiques
@@ -18,35 +19,34 @@ let lastPlayed = null;
 
 // Fonction pour récupérer les données à partir du fichier JSON
 async function fetchMusicData() {
-    
-        const response = await fetch("https://api2-6seh.onrender.com/api/v1/musics/");
-        dbMusic = await req.json();
-        data = dbMusic.result;
-        data.forEach((music) => {
-            playlist.innerHTML += `<li id="${music.id}"><h2>${music.title}</h2><div><small>${music.category}</small></div></li>`;
-        });
-    
-        const allLi = document.querySelectorAll("li");
-    
-        allLi.forEach((li) => {
-            li.addEventListener("click", function (elem) {
-                const id = parseInt(li.id);
-                const searchById = data.find((element) => element.id === id);
-                lecteur.src = `${config.urlSound}${searchById.sound}`;
-                lecteur.play();
-                cover.src = `${config.urlCover}${searchById.cover}`;
-                if (disque.classList.contains("pause")) {
-                    disque.classList.remove("pause");
-                }
-    
-                allLi.forEach((item) => {
-                    item.classList.remove("clignote");
-                });
-    
-                li.classList.add("clignote");
+    const response = await fetch("https://api2-6seh.onrender.com/api/v1/musics/");
+    dbMusic = await response.json(); // Correction ici
+    data = dbMusic.result;
+    data.forEach((music) => {
+        elements.playlist.innerHTML += `<li id="${music.id}"><h2>${music.title}</h2><div><small>${music.category}</small></div></li>`;
+    });
+
+    const allLi = document.querySelectorAll("li");
+
+    allLi.forEach((li) => {
+        li.addEventListener("click", function (elem) {
+            const id = parseInt(li.id);
+            const searchById = data.find((element) => element.id === id);
+            elements.lecteur.src = `${config.urlSound}${searchById.sound}`;
+            elements.lecteur.play();
+            elements.cover.src = `${config.urlCover}${searchById.cover}`;
+            if (elements.disque.classList.contains("pause")) {
+                elements.disque.classList.remove("pause");
+            }
+
+            allLi.forEach((item) => {
+                item.classList.remove("clignote");
             });
-    
+
+            li.classList.add("clignote");
         });
+    });
+}
 
 // Fonction pour jouer une musique
 function playMusic(music, target) {
