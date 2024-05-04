@@ -34,11 +34,50 @@ function playMusic(music, target) {
     elements.lecteur.src = `${config.urlSound}${music.sound}`;
     elements.lecteur.play();
     elements.cover.src = `${config.urlCover}${music.cover}`;
+    // Changer la vidéo en arrière-plan
+    backgroundVideo.src = `uploads/video/${music.video}`;
     // Retirer la classe 'playing' de tous les éléments de la playlist
     document.querySelectorAll("li").forEach(item => item.classList.remove('playing'));
     // Ajouter la classe 'playing' à l'élément cliqué
     target.classList.add('playing');
+    // Faire tourner le vinyle
+    document.querySelector('.disque').classList.remove('pause');
 }
+
+// Fonction pour jouer une musique aléatoire
+function playRandomMusic() {
+    let randomIndex;
+    // Générer un index aléatoire différent du dernier index joué
+    do {
+        randomIndex = Math.floor(Math.random() * data.length);
+    } while (randomIndex === lastPlayed);
+    lastPlayed = randomIndex;
+    // Récupérer la musique correspondante
+    const randomMusic = data[randomIndex];
+    // Jouer la musique
+    playMusic(randomMusic, elements.playlist.children[randomIndex]);
+}
+
+// Récupérer la référence à la vidéo en arrière-plan
+const backgroundVideo = document.getElementById("background-video");
+
+// Ajouter un écouteur d'événements au lecteur pour mettre en pause le vinyle et la vidéo lorsque la musique est en pause
+elements.lecteur.addEventListener('pause', function() {
+    document.querySelector('.disque').classList.add('pause');
+    backgroundVideo.pause(); // Mettre en pause la vidéo
+});
+
+// Ajouter un écouteur d'événements au lecteur pour faire tourner le vinyle et reprendre la vidéo lorsque la musique reprend
+elements.lecteur.addEventListener('play', function() {
+    document.querySelector('.disque').classList.remove('pause');
+    backgroundVideo.play(); // Reprendre la vidéo
+});
+
+// Ajouter un écouteur d'événements au lecteur pour jouer une nouvelle musique lorsque la musique actuelle est terminée
+elements.lecteur.addEventListener('ended', playRandomMusic);
+
+// Ajouter un écouteur d'événements au bouton "Musique Aléatoire"
+elements.randomButton.addEventListener("click", playRandomMusic);
 
 // Point d'entrée
 (async () => {
@@ -61,35 +100,3 @@ function playMusic(music, target) {
         elements.playlist.appendChild(li);
     });
 })();
-
-// Fonction pour jouer une musique aléatoire
-function playRandomMusic() {
-    // Générer un index aléatoire
-    const randomIndex = Math.floor(Math.random() * data.length);
-    // Récupérer la musique correspondante
-    const randomMusic = data[randomIndex];
-    // Jouer la musique
-    playMusic(randomMusic, elements.playlist.children[randomIndex]);
-}
-
-// Ajouter un écouteur d'événements au bouton "Musique Aléatoire"
-elements.randomButton.addEventListener("click", playRandomMusic);
-;
-
-// Fonction pour jouer une musique
-function playMusic(music, target) {
-    elements.lecteur.src = `${config.urlSound}${music.sound}`;
-    elements.lecteur.play();
-    elements.cover.src = `${config.urlCover}${music.cover}`;
-    // Retirer la classe 'playing' de tous les éléments de la playlist
-    document.querySelectorAll("li").forEach(item => item.classList.remove('playing'));
-    // Ajouter la classe 'playing' à l'élément cliqué
-    target.classList.add('playing');
-    // Faire tourner le vinyle
-    document.querySelector('.disque').classList.remove('pause');
-}
-
-// Ajouter un écouteur d'événements au lecteur pour arrêter le vinyle lorsque la musique est terminée
-elements.lecteur.addEventListener('ended', function() {
-    document.querySelector('.disque').classList.add('pause');
-});
