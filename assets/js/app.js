@@ -34,8 +34,6 @@ function playMusic(music, target) {
     elements.lecteur.src = `${config.urlSound}${music.sound}`;
     elements.lecteur.play();
     elements.cover.src = `${config.urlCover}${music.cover}`;
-    // Changer la vidéo en arrière-plan
-    backgroundVideo.src = `uploads/video/${music.video}`;
     // Retirer la classe 'playing' de tous les éléments de la playlist
     document.querySelectorAll("li").forEach(item => item.classList.remove('playing'));
     // Ajouter la classe 'playing' à l'élément cliqué
@@ -58,19 +56,14 @@ function playRandomMusic() {
     playMusic(randomMusic, elements.playlist.children[randomIndex]);
 }
 
-// Récupérer la référence à la vidéo en arrière-plan
-const backgroundVideo = document.getElementById("background-video");
-
-// Ajouter un écouteur d'événements au lecteur pour mettre en pause le vinyle et la vidéo lorsque la musique est en pause
+// Ajouter un écouteur d'événements au lecteur pour mettre en pause le vinyle lorsque la musique est en pause
 elements.lecteur.addEventListener('pause', function() {
     document.querySelector('.disque').classList.add('pause');
-    backgroundVideo.pause(); // Mettre en pause la vidéo
 });
 
-// Ajouter un écouteur d'événements au lecteur pour faire tourner le vinyle et reprendre la vidéo lorsque la musique reprend
+// Ajouter un écouteur d'événements au lecteur pour faire tourner le vinyle lorsque la musique reprend
 elements.lecteur.addEventListener('play', function() {
     document.querySelector('.disque').classList.remove('pause');
-    backgroundVideo.play(); // Reprendre la vidéo
 });
 
 // Ajouter un écouteur d'événements au lecteur pour jouer une nouvelle musique lorsque la musique actuelle est terminée

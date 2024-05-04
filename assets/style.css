@@ -65,7 +65,7 @@ body {
     margin: 0; /* Supprime les marges par défaut */
     padding: 0; /* Supprime les espaces de remplissage par défaut */
     font-family: 'Courier New', Courier, monospace; /* Police de caractères monospace rétro */
-    background-image: url('/assets/pictures/Beautiful.jpg'); /* Ajoutez le chemin de votre image ici */
+    background-image: url('/assets/pictures/paysage.jpg'); /* Ajoutez le chemin de votre image ici */
     background-size: cover; /* Pour couvrir tout l'arrière-plan */
     background-position: center; /* Pour centrer l'image */
     background-repeat: no-repeat; /* Pour éviter la répétition de l'image */
